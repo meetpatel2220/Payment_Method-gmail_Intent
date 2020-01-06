@@ -86,7 +86,7 @@ public class Main2Activity extends AppCompatActivity implements View.OnClickList
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Uri hii = Uri.parse("tel::" + "+919904278734");
+                Uri hii = Uri.parse("tel::" + "+9199*****34");
                 Intent i = new Intent(Intent.ACTION_DIAL,hii);
                 startActivity(i);
 
