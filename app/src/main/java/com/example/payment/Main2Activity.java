@@ -1,6 +1,5 @@
 package com.example.payment;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -8,27 +7,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class Main2Activity extends AppCompatActivity implements View.OnClickListener {
 
     EditText edittextTo, edittextSubject, edittextMessage;
-    Button ButtonSend, ButtonAttachment;
+    Button ButtonSend, ButtonAttachment, b1, b2;
     String email, message, subject, attechmentfile;
     Uri URI = null;
     Uri imageuri;
-ArrayList<Uri> uris=new ArrayList<Uri>();
+    ArrayList<Uri> uris = new ArrayList<Uri>();
     private static final int PICK_FROM_GALLERY = 101;
     int CollumnIndex;
-    String[] hi=new String[10];
+    String[] hi = new String[10];
 
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -38,8 +34,7 @@ ArrayList<Uri> uris=new ArrayList<Uri>();
 
         if (requestCode == PICK_FROM_GALLERY && resultCode == RESULT_OK) {
 
-            imageuri=data.getData();
-
+            imageuri = data.getData();
 
 
 //            ClipData clipData=data.getClipData();
@@ -67,26 +62,54 @@ ArrayList<Uri> uris=new ArrayList<Uri>();
 
         edittextSubject = findViewById(R.id.edittextSubject);
         edittextMessage = findViewById(R.id.edittextMessage);
-
+        b1 = findViewById(R.id.whatsapp);
+        b2 = findViewById(R.id.call);
         ButtonSend = findViewById(R.id.ButtonSend);
         ButtonAttachment = findViewById(R.id.ButtonAttachment);
 
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Uri hii = Uri.parse("smsto:" + "+919904278734");
+                Intent i = new Intent(Intent.ACTION_SENDTO, hii);
+                i.setPackage("com.whatsapp");
+                startActivity(i);
+
+
+//                startActivity(new Intent(Intent.ACTION_VIEW));
+
+            }
+        });
+
+
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Uri hii = Uri.parse("tel::" + "+919904278734");
+                Intent i = new Intent(Intent.ACTION_DIAL,hii);
+                startActivity(i);
+
+
+            }
+        });
         ButtonSend.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
             @Override
             public void onClick(View view) {
-                Intent pickintent=new Intent();
+                Intent pickintent = new Intent();
+
                 pickintent.setType("image/*");
                 pickintent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(pickintent,"select picture"),PICK_FROM_GALLERY);
-                Intent emailintent=new Intent(Intent.ACTION_SEND);
+                startActivityForResult(Intent.createChooser(pickintent, "select picture"), PICK_FROM_GALLERY);
+                Intent emailintent = new Intent(Intent.ACTION_SEND);
                 emailintent.setType("vnd.android.cursor.dir/email");
-                String to[]={"mit202220@gmail.com"};
-                emailintent.putExtra(Intent.EXTRA_EMAIL,to);
-                emailintent.putExtra(Intent.EXTRA_STREAM,imageuri  );
-                emailintent.putExtra(Intent.EXTRA_SUBJECT,"subject");
+                String to[] = {"mit202220@gmail.com"};
+                emailintent.putExtra(Intent.EXTRA_EMAIL, to);
+                emailintent.putExtra(Intent.EXTRA_STREAM, imageuri);
+                emailintent.putExtra(Intent.EXTRA_SUBJECT, "subject");
 
-                startActivity(Intent.createChooser(emailintent,"send email...."));
+                startActivity(Intent.createChooser(emailintent, "send email...."));
 
 
 //

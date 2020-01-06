@@ -54,6 +54,26 @@
 
     </Button>
 
+    <Button
+        android:id="@+id/whatsapp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="whatsapp"
+        android:textColor="#000">
+
+    </Button>
+
+    <Button
+        android:id="@+id/call"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="call"
+        android:textColor="#000">
+
+    </Button>
+
 
 
 
